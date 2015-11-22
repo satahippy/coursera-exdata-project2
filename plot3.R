@@ -1,5 +1,6 @@
 setwd("/home/sata/tmp/3/r test/coursera/exdata/project3");
 library(stats)
+library(RColorBrewer)
 library(ggplot2)
 source("load-data.R")
 plotFile = "plot3.png"
@@ -21,10 +22,11 @@ qplot(
     stat = "identity",
     position = "dodge",
     facets = . ~ type,
-    main = expression('PM'[2.5]*' emissions dynamic by years-types in the Baltimore City'),
+    fill = T,
+    main = expression('PM'[2.5]*' emissions dynamic by years-types in Baltimore City'),
     xlab = "Year",
     ylab = expression('PM'[2.5]*' emissions')
-)
+) + scale_fill_brewer(palette = "Set1") + guides(fill = F)
 
 # save to file
 dev.copy(png, filename = plotFile)
